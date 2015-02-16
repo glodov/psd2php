@@ -27,13 +27,13 @@ if (!is_dir($target))
 	mkdir($target);
 }
 
-if (substr($source, 0, 1) !== '/')
+if (substr($source, 0, 1) !== DIRECTORY_SEPARATOR)
 {
-	$source = __DIR__.'/'.$source;
+	$source = __DIR__.DIRECTORY_SEPARATOR.$source;
 }
-if (substr($target, 0, 1) !== '/')
+if (substr($target, 0, 1) !== DIRECTORY_SEPARATOR)
 {
-	$target = __DIR__.'/'.$target;
+	$target = __DIR__.DIRECTORY_SEPARATOR.$target;
 }
 
 $files = scandir($source);
@@ -41,8 +41,8 @@ chdir($source);
 foreach ($files as $i => $file)
 {
 	$name = basename($file);
-	$from = $source.'/'.$name;
-	$to = $target.'/'.$name;
+	$from = $source.DIRECTORY_SEPARATOR.$name;
+	$to = $target.DIRECTORY_SEPARATOR.$name;
 	if (in_array($name, $allowed))
 	{
 		$cmd = 'cp -Rf "'.$from.'" "'.$target.'"';
