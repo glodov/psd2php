@@ -36,6 +36,7 @@ if (substr($target, 0, 1) !== DIRECTORY_SEPARATOR)
 	$target = __DIR__.DIRECTORY_SEPARATOR.$target;
 }
 
+$count = 0;
 $files = scandir($source);
 chdir($source);
 foreach ($files as $i => $file)
@@ -48,6 +49,8 @@ foreach ($files as $i => $file)
 		$cmd = 'cp -Rf "'.$from.'" "'.$target.'"';
 		exec($cmd);
 		echo "$to - ".(is_dir($to) ? 'OK' : 'false')."\n";
+
+		$count++;
 	}
 	else if (preg_match('/\.php$/', $name))
 	{
@@ -58,7 +61,15 @@ foreach ($files as $i => $file)
 		$to = preg_replace('/php$/', 'html', $to);
 		$size = file_put_contents($to, $data);
 		echo "$to - {$size}b\n";
+
+		$count++;
 	}
 }
-
-echo "DONE\n";
+if ($count)
+{
+	echo "$count files complied.\n";
+}
+else
+{
+	echo "nothing to compile.\n";
+}
