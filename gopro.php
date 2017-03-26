@@ -1,10 +1,10 @@
-<?
+<?php
 
 function usage(){
 	echo "Script usage: php SOURCE [TARGET]
 	- SOURCE is source folder 
 	- TARGET is destination folder, by default SOURCE.pro
-	";
+	\n";
 	exit;
 }
 
